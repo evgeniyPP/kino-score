@@ -7,10 +7,13 @@
 
   h1 {
     margin-top: 15vh;
+    margin-left: 10px;
+    margin-right: 10px;
   }
 
-  h2 {
-    margin: 0.35rem 0;
+  .score {
+    text-align: center;
+    margin: 0.35rem 5px 0.35rem 5px;
 
     span {
       color: #999;
@@ -18,10 +21,15 @@
     }
   }
 
+  .total {
+    margin: 0.35rem 0;
+    margin-bottom: 2rem;
+  }
+
   input {
     margin-top: 1rem;
-    width: 40%;
-    min-width: 300px;
+    width: 90%;
+    max-width: 600px;
     font-size: 2rem;
   }
 
@@ -34,6 +42,35 @@
     position: absolute;
     bottom: 1rem;
     left: 1rem;
+  }
+
+  .loader {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    p {
+      margin-top: 2rem;
+      font-size: 1.125rem;
+      font-weight: bold;
+      color: #778899;
+    }
+  }
+
+  .error {
+    margin-top: 0;
+    color: #d8000c;
+    background-color: #ffd2d2;
+    text-align: center;
+    width: 90%;
+    padding-top: 0.5rem;
+    padding-bottom: 0.6rem;
+    border-radius: 3px;
+    max-width: 600px;
+    font-weight: bold;
+    font-size: 1.125rem;
   }
 }
 

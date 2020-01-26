@@ -19,7 +19,7 @@ const scrapeKinopoisk = async query => {
   };
 };
 
-exports.kinopoisk = functions.https.onRequest((req, res) => {
+exports.kinopoisk = functions.region('europe-west1').https.onRequest((req, res) => {
   cors(req, res, async () => {
     const data = await scrapeKinopoisk(req.body.query);
     res.send(data);
@@ -33,6 +33,16 @@ const scrapeTomatoes = async (title, year) => {
     args: ['--no-sandbox', '--disable-setuid-sandbox']
   });
   const page = await browser.newPage();
+  await page.setRequestInterception(true);
+  page.on('request', req => {
+    if (
+      req.resourceType() === 'stylesheet' ||
+      req.resourceType() === 'font' ||
+      req.resourceType() === 'image'
+    )
+      req.abort();
+    else req.continue();
+  });
 
   await page.goto(`https://www.rottentomatoes.com/search/?search=${query}`);
 
@@ -64,7 +74,7 @@ const scrapeTomatoes = async (title, year) => {
   return result;
 };
 
-exports.tomatoes = functions.https.onRequest((req, res) => {
+exports.tomatoes = functions.region('europe-west1').https.onRequest((req, res) => {
   cors(req, res, async () => {
     const data = await scrapeTomatoes(req.body.title, req.body.year);
     res.send(data);

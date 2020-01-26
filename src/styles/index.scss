@@ -20,11 +20,17 @@ button {
   text-decoration: none;
   display: inline-block;
   transition: all 0.3s;
+  border-radius: 3px;
   cursor: pointer;
 
   &:hover,
   &:focus {
     background-color: #335575;
     transition: all 0.3s;
+  }
+
+  &:disabled {
+    background-color: #ddd;
+    cursor: default;
   }
 }
